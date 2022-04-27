@@ -134,8 +134,4 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
     }
-
-    public void testi(View v) {
-        setContentView(R.layout.testi);
-    }
 }
