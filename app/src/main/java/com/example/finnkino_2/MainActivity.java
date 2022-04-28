@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> names = new ArrayList<String>();
     ArrayList<String> movies = new ArrayList<String>();
     ListView listView;
-    EditText editTextDate;
+    EditText editTextDate, firstTime, lastTime;
 
 
     @Override
@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         spinner = (Spinner) findViewById(R.id.spinner);
         listView = (ListView) findViewById(R.id.ListView);
         editTextDate = (EditText) findViewById(R.id.editTextDate);
+        firstTime = findViewById(R.id.editTextTime);
+        lastTime = findViewById(R.id.editTextTime2);
 
         context = MainActivity.this;
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -97,9 +99,19 @@ public class MainActivity extends AppCompatActivity {
         public void readXMLMovies(View v) {
             try {
 
-                SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-                Date date = new Date();
-                String thisDate = formatter.format(date);
+                movies.clear();
+                editTextDate.getText().toString();
+                String thisDate;
+
+                if (editTextDate.getText().toString().trim().length() == 0) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+                    Date date = new Date();
+                    thisDate = formatter.format(date);
+                } else {
+                    thisDate = editTextDate.getText().toString();
+                }
+
+
 
                 String ID = spinner.getSelectedItem().toString();
                 ID = tStructure.findTheater(ID);
@@ -111,7 +123,18 @@ public class MainActivity extends AppCompatActivity {
 
                 NodeList nList = doc.getDocumentElement().getElementsByTagName("Show");
 
-                movies.clear();
+                String[] startTime;
+                String title;
+
+                int time1 = 0;
+                int time2 = 2359;
+
+                if (firstTime.getText().toString().trim().length() != 0) {
+                    time1 = Integer.parseInt(firstTime.getText().toString().replaceAll("[\\D]", ""));
+
+                } if (lastTime.getText().toString().trim().length() != 0) {
+                    time2 = Integer.parseInt(lastTime.getText().toString().replaceAll("[\\D]", ""));
+                }
 
                 for (int i = 0; i < nList.getLength(); i++) {
                     Node node = nList.item(i);
@@ -119,7 +142,15 @@ public class MainActivity extends AppCompatActivity {
 
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
                         Element element = (Element) node;
-                        movies.add(element.getElementsByTagName("Title").item(0).getTextContent());
+
+                        title = element.getElementsByTagName("Title").item(0).getTextContent();
+                        startTime = element.getElementsByTagName("dttmShowStart").item(0).getTextContent().split("T");
+                        int time3 = Integer.parseInt(startTime[1].replaceAll("[\\D]", "").substring(0,4)) ;
+                        
+                        if (time3 >= time1 & time3 <= time2) {
+                            movies.add(title + "\npvm " + startTime[0] + "\nAlkaa klo " + startTime[1].substring(0,5));
+                        }
+
                     }
                 }
 
