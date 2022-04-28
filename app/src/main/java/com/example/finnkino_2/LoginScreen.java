@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ public class LoginScreen extends AppCompatActivity {
     EditText pass;
     Button login;
     TextView register;
+    TextView errorMsg;
+
     Context context;
 
     @Override
@@ -37,43 +40,61 @@ public class LoginScreen extends AppCompatActivity {
         pass = findViewById(R.id.editTextPassword);
         login = findViewById(R.id.loginButton);
         register = findViewById(R.id.textRegister);
+        errorMsg = findViewById(R.id.textViewErrorMessage);
 
         context = LoginScreen.this;
-
-        Boolean authentication = false;
+        errorMsg.setText("");
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    InputStream inS = context.openFileInput("accounts.txt");
-                    BufferedReader br = new BufferedReader(new InputStreamReader(inS));
-
-                    String line;
-                    String[] acc;
-                    while((line = br.readLine())!=null) {
-                         acc = line.split(",");
-                        if (acc[0].equals(user.getText().toString()) & acc[1].equals(pass.getText().toString())) {
-                            Boolean authentication = true;
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
-                            break;
-                        }
-                    }
-                br.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                verification();
             }
         });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RegistrationScreeen.class);
-                startActivity(intent);
+                goToRegistration();
             }
         });
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void verification(){
+        try {
+            InputStream inS = context.openFileInput("accounts.txt");
+            BufferedReader br = new BufferedReader(new InputStreamReader(inS));
+
+            String line;
+            String[] acc;
+            while((line = br.readLine())!=null) {
+                acc = line.split(",");
+
+                // go to main screen if the account exists
+                if (acc[0].equals(user.getText().toString()) & acc[1].equals(pass.getText().toString())) {
+                    goToMain();
+                    errorMsg.setText("");
+                    break;
+                } else {
+                        errorMsg.setText("Käyttäjänimi ja salasana eivät täsmää");
+                }
+            }
+            inS.close();
+            br.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void goToMain() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToRegistration() {
+        Intent intent = new Intent(getApplicationContext(), RegistrationScreeen.class);
+        startActivity(intent);
     }
 }

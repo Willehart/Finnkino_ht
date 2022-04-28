@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".RegistrationScreeen">
 
+    <TextView
+        android:id="@+id/textViewErrorMessage2"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:textColor="#FD0000"
+        app:layout_constraintBottom_toTopOf="@+id/editTextUserName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <EditText
         android:id="@+id/editTextUserName"
         android:layout_width="wrap_content"
