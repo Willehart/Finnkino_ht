@@ -30,7 +30,7 @@ public class RegistrationScreeen extends AppCompatActivity {
     Button register;
     TextView login;
     TextView errorMsg;
-    String[] passwordErrors = {"", "", "", ""};
+    String[] passwordErrors = {"", "", "", "", ""};
     Boolean accountExists;
     String[] acc;
     String pass = "";
@@ -190,12 +190,12 @@ public class RegistrationScreeen extends AppCompatActivity {
             passwordErrors[3] = "Vähintään yksi pieni kirjain\n";
         }
         if (isLongEnough) {
-            passwordErrors[3] = "";
+            passwordErrors[4] = "";
         } else {
-            passwordErrors[3] = "Vähintään 12 merkkiä (pituus " + pass.length() + ")\n";
+            passwordErrors[4] = "Vähintään 12 merkkiä (pituus " + pass.length() + ")\n";
         }
 
-        errorMsg.setText(passwordErrors[0] + passwordErrors[1] + passwordErrors[2] + passwordErrors[3]);
+        errorMsg.setText(passwordErrors[0] + passwordErrors[1] + passwordErrors[2] + passwordErrors[3]+ passwordErrors[4]);
 
         if (hasSpecial & hasDigit & hasCapital & hasSmall & isLongEnough) {
             passwordOK = true;
