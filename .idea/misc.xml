@@ -4,13 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/lauri/AndroidStudioProjects/Finnkino_ht/app/src/main/res/layout/activity_login_screen.xml" value="0.5" />
-        <entry key="..\:/Users/lauri/AndroidStudioProjects/Finnkino_ht/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/lauri/AndroidStudioProjects/Finnkino_ht/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Users/lauri/AndroidStudioProjects/Finnkino_ht/app/src/main/res/layout/activity_movie_preview.xml" value="0.5" />
         <entry key="..\:/Users/lauri/AndroidStudioProjects/Finnkino_ht/app/src/main/res/layout/activity_registration_screeen.xml" value="0.5" />
         <entry key="..\:/Users/lauri/AndroidStudioProjects/Finnkino_ht/app/src/main/res/layout/fragment_fr__login.xml" value="0.5040760869565217" />
         <entry key="..\:/Users/lauri/AndroidStudioProjects/Finnkino_ht/app/src/main/res/layout/fragment_fr__movie_list.xml" value="0.2796352583586626" />
         <entry key="..\:/Users/lauri/AndroidStudioProjects/Finnkino_ht/app/src/main/res/layout/fragment_fr__registration.xml" value="0.5" />
         <entry key="..\:/Users/lauri/AndroidStudioProjects/Finnkino_ht/app/src/main/res/layout/testi.xml" value="0.5040760869565217" />
+        <entry key="..\:/Users/lauri/AndroidStudioProjects/Finnkino_ht/app/src/main/res/layout/textstyle.xml" value="0.41530797101449274" />
       </map>
     </option>
   </component>

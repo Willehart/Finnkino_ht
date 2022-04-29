@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#252629"
     tools:context=".RegistrationScreeen">
 
     <TextView
@@ -25,6 +26,8 @@
         android:ems="10"
         android:hint="käyttäjänimi"
         android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,6 +39,8 @@
         android:ems="10"
         android:hint="salasana"
         android:inputType="textPassword"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextUserName" />
@@ -45,6 +50,8 @@
         android:layout_width="212dp"
         android:layout_height="wrap_content"
         android:text="rekisteröidy"
+        android:textColor="#000000"
+        app:backgroundTint="#FFC107"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
@@ -57,7 +64,7 @@
         android:clickable="true"
         android:gravity="center"
         android:text="Oletko jo käyttäjä? Kirjaudu"
-        android:textColor="#3F51B5"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerButton" />

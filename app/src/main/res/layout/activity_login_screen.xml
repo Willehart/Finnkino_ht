@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#252629"
     tools:context=".LoginScreen">
 
     <EditText
@@ -14,6 +15,8 @@
         android:ems="10"
         android:hint="käyttäjänimi"
         android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +30,7 @@
         android:clickable="true"
         android:gravity="center"
         android:text="Uusi käyttäjä? Rekisteröidy"
-        android:textColor="#3F51B5"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton" />
@@ -37,6 +40,8 @@
         android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:text="Kirjaudu"
+        android:textColor="#000000"
+        app:backgroundTint="#FFC107"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
@@ -48,6 +53,8 @@
         android:ems="10"
         android:hint="salasana"
         android:inputType="textPassword"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextUserName" />

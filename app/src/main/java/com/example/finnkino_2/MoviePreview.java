@@ -3,6 +3,7 @@ package com.example.finnkino_2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.TestLooperManager;
@@ -26,21 +27,25 @@ import java.util.ArrayList;
 public class MoviePreview extends AppCompatActivity {
 
     TextView title;
+    TextView year;
     TextView details;
     EditText comment;
     RatingBar rating;
     Button sendReview;
     ListView commentsList;
     MovieLibrary mLibrary = MovieLibrary.getInstance();
+    Accounts accounts = Accounts.getInstance();
     Context context = this;
     ArrayList<String> ratings;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_preview);
 
         title = findViewById(R.id.textViewTitle);
+        year = findViewById(R.id.textViewYear);
         details = findViewById(R.id.textViewDetails);
         rating = findViewById(R.id.ratingBar);
         comment = findViewById(R.id.editTextComment);
@@ -48,7 +53,9 @@ public class MoviePreview extends AppCompatActivity {
         commentsList = findViewById(R.id.listViewComments);
 
         title.setText(mLibrary.returnMovie().getName());
-        details.setText(mLibrary.returnMovie().getID());
+        year.setText(mLibrary.returnMovie().getYear());
+        details.setText(mLibrary.getTime() + "\n" + mLibrary.returnMovie().getGenre() + "\n" +
+                "Ikärajoitus: " + mLibrary.returnMovie().getAge() + "\nKesto: " + mLibrary.returnMovie().getLength() + " min");
 
         updateComments();
     }
@@ -60,7 +67,10 @@ public class MoviePreview extends AppCompatActivity {
 
         try {
             OutputStreamWriter writer = new OutputStreamWriter(context.openFileOutput("ratings.txt", Context.MODE_APPEND));
-            writer.write(mLibrary.returnMovie().getID() + ";" + " Lauri " + ";" + rating.getRating() + ";" + comment.getText().toString() + "\n");
+
+            if (rating.getRating() != 0.0 | !comment.getText().toString().equals("")) {
+                writer.write(mLibrary.returnMovie().getID() + ";" + accounts.getCurrentUser() + ";" + rating.getRating() + "; " + comment.getText().toString() + "\n");
+            }
             writer.close();
 
             updateComments();
@@ -83,13 +93,19 @@ public class MoviePreview extends AppCompatActivity {
 
                 // go to main screen if the account exists
                 if (ratingInfo[0].equals(mLibrary.returnMovie().getID())) {
-                    ratings.add(ratingInfo[1] + "   " + ratingInfo[2] + "\n" + ratingInfo[3]);
+                    if (ratingInfo[2].equals("0.0")) {
+                        ratings.add(ratingInfo[1] + "\n" + ratingInfo[3] + "\n");
+                    } else if (comment.getText().toString().equals("")) {
+                        ratings.add(ratingInfo[1] + "   " + ratingInfo[2] + "\n");
+                    } else {
+                        ratings.add(ratingInfo[1] + "   " + ratingInfo[2] + "\n" + ratingInfo[3] + "\n");
+                    }
                 }
             }
             inS.close();
             br.close();
 
-            ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, ratings);
+            ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.textstyle, ratings);
             commentsList.setAdapter(arrayAdapter);
 
         } catch (FileNotFoundException e) {

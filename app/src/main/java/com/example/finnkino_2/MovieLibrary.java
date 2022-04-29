@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class MovieLibrary {
     Boolean ifExists = false;
     Movie theOne = null;
+    String time;
 
     private static MovieLibrary instance = null;
     ArrayList<Movie> movieList = new ArrayList<Movie>();
@@ -19,7 +20,7 @@ public class MovieLibrary {
     private MovieLibrary() {
     }
 
-    public void newMovie(String name, String ID) {
+    public void newMovie(String title, String ID, String lengthInMinutes, String genre, String year, String age) {
 
         ifExists = false;
 
@@ -30,7 +31,7 @@ public class MovieLibrary {
             }
         }
         if (!ifExists){
-            Movie movie = new Movie(name, ID);
+            Movie movie = new Movie(title, ID, lengthInMinutes, genre, year, age);
             movieList.add(movie);
         }
     }
@@ -41,6 +42,12 @@ public class MovieLibrary {
                 theOne = m;
             }
         }
+    }
+    public void setTime(String t) {
+        time = t;
+    }
+    public String getTime() {
+        return time;
     }
 
     public Movie returnMovie() {

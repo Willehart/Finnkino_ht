@@ -28,6 +28,7 @@ public class LoginScreen extends AppCompatActivity {
     Button login;
     TextView register;
     TextView errorMsg;
+    Accounts accounts = Accounts.getInstance();
 
     Context context;
 
@@ -78,6 +79,7 @@ public class LoginScreen extends AppCompatActivity {
                 if (acc[0].equals(user.getText().toString())) {
                     accountExists = true;
                     if (acc[1].equals(pass.getText().toString())) {
+                        accounts.setCurrentUser(user.getText().toString());
                         goToMain();
                     } else {
                         errorMsg.setText("Väärä salasana");
@@ -99,6 +101,7 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     public void goToMain() {
+        user.getText();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }

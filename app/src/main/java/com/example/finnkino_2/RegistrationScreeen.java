@@ -38,6 +38,7 @@ public class RegistrationScreeen extends AppCompatActivity {
     Boolean hasSpecial = false, hasDigit = false, hasCapital = false, hasSmall = false, isLongEnough = false;
     Boolean passwordOK = false;
     Context context;
+    Accounts accounts = Accounts.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,8 @@ public class RegistrationScreeen extends AppCompatActivity {
     // save account to the accounts.txt file
     public void saveAccount() {
         try {
+            accounts.addAccount(newUser.getText().toString(), newPass.getText().toString());
+
             OutputStreamWriter writer = new OutputStreamWriter(context.openFileOutput("accounts.txt", Context.MODE_APPEND));
             writer.write(newUser.getText().toString() + "," + newPass.getText().toString() + "\n");
             writer.close();
@@ -124,6 +127,7 @@ public class RegistrationScreeen extends AppCompatActivity {
             checkPasswordRequirements();
             if (passwordOK) {
                 errorMsg.setText("");
+                accounts.setCurrentUser(newUser.getText().toString());
                 saveAccount();
                 goToMain();
             }
