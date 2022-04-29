@@ -11,7 +11,7 @@
         android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:gravity="center"
+        android:gravity="bottom|center_horizontal"
         android:textColor="#FD0000"
         app:layout_constraintBottom_toTopOf="@+id/editTextUserName"
         app:layout_constraintEnd_toEndOf="parent"

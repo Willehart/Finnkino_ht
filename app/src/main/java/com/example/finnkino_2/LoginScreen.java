@@ -67,18 +67,28 @@ public class LoginScreen extends AppCompatActivity {
 
             String line;
             String[] acc;
+            Boolean accountExists = false;
+
+            errorMsg.setText("");
+
             while((line = br.readLine())!=null) {
                 acc = line.split(",");
 
                 // go to main screen if the account exists
-                if (acc[0].equals(user.getText().toString()) & acc[1].equals(pass.getText().toString())) {
-                    goToMain();
-                    errorMsg.setText("");
+                if (acc[0].equals(user.getText().toString())) {
+                    accountExists = true;
+                    if (acc[1].equals(pass.getText().toString())) {
+                        goToMain();
+                    } else {
+                        errorMsg.setText("Väärä salasana");
+                    }
                     break;
-                } else {
-                        errorMsg.setText("Käyttäjänimi ja salasana eivät täsmää");
                 }
             }
+            if (!accountExists) {
+                errorMsg.setText("Käyttäjää ei ole");
+            }
+
             inS.close();
             br.close();
         } catch (FileNotFoundException e) {
