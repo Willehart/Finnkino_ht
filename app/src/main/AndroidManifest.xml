@@ -13,12 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Finnkino_2">
         <activity
+            android:name=".MoviePreview"
+            android:exported="false" />
+        <activity
             android:name=".RegistrationScreeen"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-        <activity android:name=".LoginScreen"
+        <activity
+            android:name=".LoginScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

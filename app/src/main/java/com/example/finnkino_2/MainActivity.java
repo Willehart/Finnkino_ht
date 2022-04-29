@@ -3,14 +3,18 @@ package com.example.finnkino_2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -31,10 +35,13 @@ public class MainActivity extends AppCompatActivity {
 
     Context context = null;
     TheaterStructure tStructure = TheaterStructure.getInstance();
-    String name, ID;
+    MovieLibrary mLibrary = MovieLibrary.getInstance();
+    MoviePreview mPreview = new MoviePreview();
+    String name, ID, selectedID;
     Spinner spinner;
     ArrayList<String> names = new ArrayList<String>();
     ArrayList<String> movies = new ArrayList<String>();
+    ArrayList<String> movieIDs = new ArrayList<String>();
     ListView listView;
     EditText editTextDate, firstTime, lastTime;
 
@@ -55,6 +62,18 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         readXML();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                selectedID = movieIDs.get(i);
+                mLibrary.getMovie(selectedID);
+
+                Intent intent = new Intent(getApplicationContext(), MoviePreview.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void readXML() {
@@ -100,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
             try {
 
                 movies.clear();
+                movieIDs.clear();
                 editTextDate.getText().toString();
                 String thisDate;
 
@@ -125,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String[] startTime;
                 String title;
+                String eventId;
 
                 int time1 = 0;
                 int time2 = 2359;
@@ -144,15 +165,21 @@ public class MainActivity extends AppCompatActivity {
                         Element element = (Element) node;
 
                         title = element.getElementsByTagName("Title").item(0).getTextContent();
+                        eventId = element.getElementsByTagName("EventID").item(0).getTextContent();
                         startTime = element.getElementsByTagName("dttmShowStart").item(0).getTextContent().split("T");
+
+                        mLibrary.newMovie(title, eventId);
+
                         int time3 = Integer.parseInt(startTime[1].replaceAll("[\\D]", "").substring(0,4)) ;
                         
                         if (time3 >= time1 & time3 <= time2) {
                             movies.add(title + "\npvm " + startTime[0] + "\nAlkaa klo " + startTime[1].substring(0,5));
+                            movieIDs.add(eventId);
                         }
-
                     }
                 }
+
+                //mLibrary.printMovies();
 
                 ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, movies);
                 listView.setAdapter(arrayAdapter);
