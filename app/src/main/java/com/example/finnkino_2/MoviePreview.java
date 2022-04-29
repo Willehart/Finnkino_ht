@@ -64,19 +64,17 @@ public class MoviePreview extends AppCompatActivity {
     }
 
     public void sendReviewBut(View v) {
+        if (rating.getRating() != 0.0 | !comment.getText().toString().equals("")) {
+            try {
+                OutputStreamWriter writer = new OutputStreamWriter(context.openFileOutput("ratings.txt", Context.MODE_APPEND));
+                writer.write(mLibrary.returnMovie().getID() + ";" + accounts.getCurrentUser() + ";" + rating.getRating() + ";" + comment.getText().toString() + " \n");
+                writer.close();
 
-        try {
-            OutputStreamWriter writer = new OutputStreamWriter(context.openFileOutput("ratings.txt", Context.MODE_APPEND));
-
-            if (rating.getRating() != 0.0 | !comment.getText().toString().equals("")) {
-                writer.write(mLibrary.returnMovie().getID() + ";" + accounts.getCurrentUser() + ";" + rating.getRating() + "; " + comment.getText().toString() + "\n");
-            }
-            writer.close();
-
-            updateComments();
-        } catch (IOException e) {
+            } catch (IOException e) {
             e.printStackTrace();
+            }
         }
+        updateComments();
     }
 
     public void updateComments() {
@@ -93,13 +91,7 @@ public class MoviePreview extends AppCompatActivity {
 
                 // go to main screen if the account exists
                 if (ratingInfo[0].equals(mLibrary.returnMovie().getID())) {
-                    if (ratingInfo[2].equals("0.0")) {
-                        ratings.add(ratingInfo[1] + "\n" + ratingInfo[3] + "\n");
-                    } else if (comment.getText().toString().equals("")) {
-                        ratings.add(ratingInfo[1] + "   " + ratingInfo[2] + "\n");
-                    } else {
-                        ratings.add(ratingInfo[1] + "   " + ratingInfo[2] + "\n" + ratingInfo[3] + "\n");
-                    }
+                    ratings.add(ratingInfo[1] + "   " + ratingInfo[2] + "\n" + ratingInfo[3] + "\n");
                 }
             }
             inS.close();
