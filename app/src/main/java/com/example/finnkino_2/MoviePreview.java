@@ -91,7 +91,7 @@ public class MoviePreview extends AppCompatActivity {
 
                 // go to main screen if the account exists
                 if (ratingInfo[0].equals(mLibrary.returnMovie().getID())) {
-                    ratings.add(ratingInfo[1] + "   " + ratingInfo[2] + "\n" + ratingInfo[3] + "\n");
+                    ratings.add(0, ratingInfo[1] + "   " + ratingInfo[2] + "\n" + ratingInfo[3] + "\n");
                 }
             }
             inS.close();
@@ -99,6 +99,7 @@ public class MoviePreview extends AppCompatActivity {
 
             ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.textstyle, ratings);
             commentsList.setAdapter(arrayAdapter);
+            commentsList.smoothScrollToPosition(0);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
