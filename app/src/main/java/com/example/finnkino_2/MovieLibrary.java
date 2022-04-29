@@ -36,7 +36,7 @@ public class MovieLibrary {
         }
     }
 
-    public void getMovie(String id) {
+    public void findMovie(String id) {
         for (Movie m : movieList) {
             if (id.equals(m.getID())) {
                 theOne = m;

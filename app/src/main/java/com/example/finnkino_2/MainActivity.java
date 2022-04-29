@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         username.setText(accounts.getCurrentUser());
 
-        readXML();
+        readXMLTheaters();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 selectedID = movieIDs.get(i);
                 pickedMovieDateTime = startingTimes.get(i);
                 mLibrary.setTime(pickedMovieDateTime);
-                mLibrary.getMovie(selectedID);
+                mLibrary.findMovie(selectedID);
 
                 Intent intent = new Intent(getApplicationContext(), MoviePreview.class);
                 startActivity(intent);
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void readXML() {
+    public void readXMLTheaters() {
         try {
 
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
