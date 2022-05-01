@@ -6,6 +6,7 @@ public class Accounts {
 
     String currentUser = "";
 
+    // Singleton
     private static Accounts instance = null;
     ArrayList<User> accountsList = new ArrayList<User>();
 
@@ -24,6 +25,7 @@ public class Accounts {
         accountsList.add(user);
     }
 
+    // methods for getting the username when logging in or registering and using it in main activity
     public String getCurrentUser() {
         return currentUser;
     }

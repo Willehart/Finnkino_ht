@@ -7,6 +7,7 @@ public class MovieLibrary {
     Movie theOne = null;
     String time;
 
+    // Singleton
     private static MovieLibrary instance = null;
     ArrayList<Movie> movieList = new ArrayList<Movie>();
 
@@ -43,14 +44,15 @@ public class MovieLibrary {
             }
         }
     }
+    public Movie returnMovie() {
+        return theOne;
+    }
+
+    // methods used for transferring the selected movie time to the preview activity
     public void setTime(String t) {
         time = t;
     }
     public String getTime() {
         return time;
-    }
-
-    public Movie returnMovie() {
-        return theOne;
     }
 }

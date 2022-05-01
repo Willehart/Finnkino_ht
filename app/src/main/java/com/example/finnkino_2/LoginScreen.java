@@ -60,6 +60,7 @@ public class LoginScreen extends AppCompatActivity {
         });
     }
 
+    // checks if the given username exists and if the password matches
     @SuppressLint("SetTextI18n")
     public void verification(){
         try {

@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // lists all Finnkino theaters from the open data XML to the spinner
     public void readXMLTheaters() {
         try {
 
@@ -122,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Search button functionality:
+    // searches for movies in the Finnkino XML according to user-defined criteria
     public void readXMLMovies(View v) {
         try {
 

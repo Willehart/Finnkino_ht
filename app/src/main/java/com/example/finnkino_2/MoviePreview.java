@@ -63,7 +63,7 @@ public class MoviePreview extends AppCompatActivity {
     public MoviePreview() {
     }
 
-    public void sendReviewBut(View v) {
+    public void sendReviewButton(View v) {
         if (rating.getRating() != 0.0 | !comment.getText().toString().equals("")) {
             try {
                 OutputStreamWriter writer = new OutputStreamWriter(context.openFileOutput("ratings.txt", Context.MODE_APPEND));
@@ -77,6 +77,7 @@ public class MoviePreview extends AppCompatActivity {
         updateComments();
     }
 
+    // refreshes the comments listview whenever a review is given
     public void updateComments() {
         try {
             InputStream inS = context.openFileInput("ratings.txt");
@@ -89,7 +90,6 @@ public class MoviePreview extends AppCompatActivity {
             while((line = br.readLine())!=null) {
                 ratingInfo = line.split(";");
 
-                // go to main screen if the account exists
                 if (ratingInfo[0].equals(mLibrary.returnMovie().getID())) {
                     ratings.add(0, ratingInfo[1] + "   " + ratingInfo[2] + "\n" + ratingInfo[3] + "\n");
                 }

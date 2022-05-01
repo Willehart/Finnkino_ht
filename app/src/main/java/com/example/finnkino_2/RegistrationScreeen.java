@@ -80,7 +80,6 @@ public class RegistrationScreeen extends AppCompatActivity {
         });
     }
 
-    // save account to the accounts.txt file
     public void saveAccount() {
         try {
             accounts.addAccount(newUser.getText().toString(), newPass.getText().toString());
@@ -94,7 +93,7 @@ public class RegistrationScreeen extends AppCompatActivity {
         }
     }
 
-    // checked when register button is pressed
+    // checks if an account can be created when register button is pressed
     @SuppressLint("SetTextI18n")
     public void checkAccounts() {
         try {
@@ -134,7 +133,8 @@ public class RegistrationScreeen extends AppCompatActivity {
         }
     }
 
-    // executed whenever the password field text is changed
+    // password is checked whenever the password field text is changed
+    // displays remaining requirements until the password is OK
     @SuppressLint("SetTextI18n")
     public void checkPasswordRequirements() {
         errorMsg.setTextColor(Color.RED);

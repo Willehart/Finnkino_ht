@@ -3,6 +3,8 @@ package com.example.finnkino_2;
 import java.util.ArrayList;
 
 public class TheaterStructure {
+
+    // Singleton
     private static TheaterStructure instance = null;
     ArrayList<Theater> theaterList = new ArrayList<Theater>();
 
@@ -21,6 +23,7 @@ public class TheaterStructure {
         theaterList.add(theater);
     }
 
+    // get the ID of the selected theater when searching for movies
     public String findTheater(String tName) {
         String tID = "";
         for (Theater theater : theaterList) {
